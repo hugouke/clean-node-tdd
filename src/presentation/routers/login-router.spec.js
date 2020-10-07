@@ -2,8 +2,11 @@ const MissingParamError = require('../helpers/missing-param-error');
 const LoginRouter = require('./login-router');
 
 const makeSut = () => {
-  const sut = new LoginRouter();
-  return { sut };
+  const authUseCaseSpy = {
+    auth: jest.fn(),
+  };
+  const sut = new LoginRouter(authUseCaseSpy);
+  return { sut, authUseCase: authUseCaseSpy };
 };
 
 describe('Login Router', () => {
@@ -41,5 +44,17 @@ describe('Login Router', () => {
     const { sut } = makeSut();
     const httpResponse = sut.route({});
     expect(httpResponse.statusCode).toBe(500);
+  });
+
+  it('should be called AuthUseCase with correct params', () => {
+    const { sut, authUseCase } = makeSut();
+    const httpRequest = {
+      body: {
+        email: 'any@email.com',
+        password: 'any',
+      },
+    };
+    sut.route(httpRequest);
+    expect(authUseCase.auth).toBeCalledWith(httpRequest.body.email, httpRequest.body.password);
   });
 });
