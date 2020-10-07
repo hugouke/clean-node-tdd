@@ -57,4 +57,16 @@ describe('Login Router', () => {
     sut.route(httpRequest);
     expect(authUseCase.auth).toBeCalledWith(httpRequest.body.email, httpRequest.body.password);
   });
+
+  it('should be return 401 when invalid credentials are provided', () => {
+    const { sut } = makeSut();
+    const httpRequest = {
+      body: {
+        email: 'invalid@email.com',
+        password: 'invalid',
+      },
+    };
+    httpResponse = sut.route(httpRequest);
+    expect(httpResponse.statusCode).toBe(401);
+  });
 });
