@@ -1,15 +1,14 @@
 module.exports = {
-  'env': {
-    'browser': true,
-    'commonjs': true,
-    'es2021': true,
+  env: {
+    node: true,
+    jest: true,
+    es2021: true,
   },
-  'extends': [
-    'google',
-  ],
-  'parserOptions': {
-    'ecmaVersion': 12,
+  root: true,
+
+  extends: ['prettier'],
+  parserOptions: {
+    ecmaVersion: 12,
   },
-  'rules': {
-  },
+  rules: { semi: 'error' },
 };
