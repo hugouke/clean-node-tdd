@@ -1,0 +1,42 @@
+{
+  "name": "clean-node-tdd",
+  "version": "1.0.0",
+  "description": "API in NodeJS developed with TDD and clean archteture.",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hugouke/clean-node-tdd.git"
+  },
+  "keywords": [
+    "nodejs",
+    "tdd"
+  ],
+  "author": "Hugo Nogueira",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hugouke/clean-node-tdd/issues"
+  },
+  "lint-stagged": {
+    "*.js": [
+      "npx eslint",
+      "git add"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "homepage": "https://github.com/hugouke/clean-node-tdd#readme",
+  "devDependencies": {
+    "eslint": "^7.10.0",
+    "eslint-config-google": "^0.14.0",
+    "husky": "^5.0.0-alpha.6",
+    "jest": "^26.5.2",
+    "lint-staged": "^10.4.0"
+  },
+  "dependencies": {}
+}
