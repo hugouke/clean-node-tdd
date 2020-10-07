@@ -4,7 +4,8 @@
   "description": "API in NodeJS developed with TDD and clean archteture.",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest --watch",
+    "test:staged": "jest"
   },
   "repository": {
     "type": "git",
@@ -26,6 +27,7 @@
   },
   "lint-staged": {
     "*.{js,md}": [
+      "npm run test:staged",
       "prettier --write"
     ]
   },
