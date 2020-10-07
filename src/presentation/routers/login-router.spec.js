@@ -67,9 +67,10 @@ describe('Login Router', () => {
         password: 'valid',
       },
     };
-    authUseCase.auth = jest.fn().mockReturnValue({ accesToke: 'valid' });
+    authUseCase.auth = jest.fn().mockReturnValue('valid');
     const httpResponse = sut.route(httpRequest);
     expect(httpResponse.statusCode).toBe(200);
+    expect(httpResponse.body).toEqual({ accessToken: 'valid' });
   });
 
   it('should be return 401 when invalid credentials are provided', () => {
