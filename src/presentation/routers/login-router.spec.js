@@ -59,6 +59,19 @@ describe('Login Router', () => {
     expect(authUseCase.auth).toBeCalledWith(httpRequest.body.email, httpRequest.body.password);
   });
 
+  it('should be return 200 when valid credentials are provided', () => {
+    const { sut, authUseCase } = makeSut();
+    const httpRequest = {
+      body: {
+        email: 'valid@email.com',
+        password: 'valid',
+      },
+    };
+    authUseCase.auth = jest.fn().mockReturnValue({ accesToke: 'valid' });
+    const httpResponse = sut.route(httpRequest);
+    expect(httpResponse.statusCode).toBe(200);
+  });
+
   it('should be return 401 when invalid credentials are provided', () => {
     const { sut } = makeSut();
     const httpRequest = {
@@ -67,7 +80,7 @@ describe('Login Router', () => {
         password: 'invalid',
       },
     };
-    httpResponse = sut.route(httpRequest);
+    const httpResponse = sut.route(httpRequest);
     expect(httpResponse.statusCode).toBe(401);
     expect(httpResponse.body).toEqual(new UnauthorizedError());
   });
